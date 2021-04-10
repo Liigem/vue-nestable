@@ -11,7 +11,7 @@
 
 <script>
 
-import {default as VueNestable} from './components/VueNestable';
+import {default as VueNestable} from './VueNestable';
 
 export default {
   name: 'App',
