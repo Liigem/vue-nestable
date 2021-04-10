@@ -1,4 +1,4 @@
-# lii-nestable
+# vue-nestable
 
 ## Project setup
 ```
