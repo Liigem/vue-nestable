@@ -1,28 +1,26 @@
 <template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
-  </div>
+  <vue-nestable>
+
+    <slot name="entry_1">Entry 1</slot>
+    <slot name="entry_2">Entry 2</slot>
+    <slot name="entry_3">Entry 3</slot>
+    <slot name="entry_4">Entry 4</slot>
+
+  </vue-nestable>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+
+import {default as VueNestable} from './components/VueNestable';
 
 export default {
   name: 'App',
   components: {
-    HelloWorld
+    VueNestable,
   }
 }
+
 </script>
 
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
 </style>
