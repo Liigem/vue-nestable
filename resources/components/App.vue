@@ -1,13 +1,12 @@
 <template>
   <section>
 
-    <vue-nestable :value="nestableItems">
-      <template v-for="(item,index) in nestableItems">
-        <vue-nestable-handle
-            v-slot="{ item }"
-            :item="item"
-        />
-      </template>
+    <vue-nestable v-model="nestableItems">
+      <vue-nestable-handle
+          v-slot="{ item }"
+          :item="item">
+        Test
+      </vue-nestable-handle>
     </vue-nestable>
 
   </section>

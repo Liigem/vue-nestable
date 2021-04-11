@@ -30,12 +30,12 @@ export default {
   inject: ['group', 'onDragEnd'],
 
   mounted() {
-    console.log('mounted  ', {terze: this.item})
   },
 
   methods: {
     dragstart(event) {
       const item = this.item || this.$parent.item
+      console.log({item})
       this.notifyDragStart(this.group, event, item)
     },
     touchend(event) {

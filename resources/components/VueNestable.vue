@@ -14,7 +14,7 @@
 
       <!-- Render items -->
       <template
-          v-for="(item, index) in value"
+          v-for="(item, index) in modelValue"
           :key="item[keyProp]"
       >
         <NestableItem
@@ -96,7 +96,7 @@ export default {
 
   props: {
 
-    value: {
+    modelValue: {
       type: Array,
       required: true,
       default: () => ([])
@@ -165,7 +165,7 @@ export default {
   computed: {
 
     listIsEmpty() {
-      return this.value.length === 0
+      return this.modelValue.length === 0
     },
 
     itemOptions() {
@@ -211,8 +211,8 @@ export default {
   },
 
   created() {
-    const items = listWithChildren(this.value, this.childrenProp)
-    this.$emit('input', items)
+    const items = listWithChildren(this.modelValue, this.childrenProp)
+    this.$emit('update:modelValue', items)
     this.isDirty = false
 
     this.registerNestable(this)
@@ -263,7 +263,7 @@ export default {
       this.startTrackMouse()
 
       this.dragItem = item
-      this.itemsOld = this.value
+      this.itemsOld = this.modelValue
 
       // Trigger a mouseMove event to update the ghost item with the mouse
       // position
@@ -400,7 +400,7 @@ export default {
 
       if (!this.hook('beforeMove', {dragItem, pathFrom, pathTo: realPathTo})) return
 
-      let items = this.value
+      let items = this.modelValue
 
       items = update(items, removePath)
       items = update(items, insertPath)
@@ -525,7 +525,7 @@ export default {
     },
 
     dragApply() {
-      this.$emit('change', this.dragItem, {items: this.value, pathTo: this.pathTo})
+      this.$emit('change', this.dragItem, {items: this.modelValue, pathTo: this.pathTo})
 
       this.pathTo = null
       this.itemsOld = null

@@ -101,7 +101,7 @@ export default {
 
     const nestableHandle = $el.querySelector('.nestable-handle');
 
-    nestableHandle.appendChild(document.createTextNode(text))
+    // nestableHandle.appendChild(document.createTextNode(text))
   },
 
   computed: {
