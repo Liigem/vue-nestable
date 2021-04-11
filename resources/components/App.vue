@@ -2,11 +2,12 @@
   <section>
 
     <vue-nestable :value="nestableItems">
-      <vue-nestable-handle
-          v-slot="{ item }"
-          :item="item"
-      >{{ item }}
-      </vue-nestable-handle>
+      <template v-for="(item,index) in nestableItems">
+        <vue-nestable-handle
+            v-slot="{ item }"
+            :item="item"
+        />
+      </template>
     </vue-nestable>
 
   </section>
@@ -49,6 +50,6 @@ export default {
 
 <style>
 section {
-  width: 200px;
+  width: 400px;
 }
 </style>

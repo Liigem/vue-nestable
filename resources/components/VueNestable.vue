@@ -25,7 +25,7 @@
           <!-- bind scoped slots to the nestable-item component -->
           <template
               v-slot="scope"
-              v-for="slot in Object.keys($slots)"
+              v-for="(slot, indexSlot) in Object.keys($slots)"
               :slot="slot"
           >
             <slot
@@ -51,7 +51,7 @@
             <!-- bind scoped slots to the nestable-item component -->
             <template
                 v-slot="scope"
-                v-for="slot in Object.keys($slots)"
+                v-for="(slot, indexSlot) in Object.keys($slots)"
                 :slot="slot"
             >
               <slot
@@ -212,7 +212,6 @@ export default {
 
   created() {
     const items = listWithChildren(this.value, this.childrenProp)
-    console.log({items})
     this.$emit('input', items)
     this.isDirty = false
 
@@ -359,6 +358,7 @@ export default {
         }
 
         const diffX = this.rtl ? this.mouse.last.x - clientX : clientX - this.mouse.last.x
+
         if (
             (diffX >= 0 && this.mouse.shift.x >= 0) ||
             (diffX <= 0 && this.mouse.shift.x <= 0)
@@ -367,6 +367,7 @@ export default {
         } else {
           this.mouse.shift.x = 0
         }
+
         this.mouse.last.x = clientX
 
         if (Math.abs(this.mouse.shift.x) > this.threshold) {

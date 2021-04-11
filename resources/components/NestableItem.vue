@@ -31,7 +31,7 @@
           <!-- bind scoped slots to the nestable-item component -->
           <template
               v-slot="scope"
-              v-for="slot in Object.keys($slots)"
+              v-for="(slot, indexSlot) in Object.keys($slots)"
               :slot="slot"
           >
             <slot
@@ -93,6 +93,15 @@ export default {
       breakPoint: null,
       moveDown: false
     }
+  },
+
+  mounted() {
+    const {item, $el} = this;
+    const {text} = item;
+
+    const nestableHandle = $el.querySelector('.nestable-handle');
+
+    nestableHandle.appendChild(document.createTextNode(text))
   },
 
   computed: {

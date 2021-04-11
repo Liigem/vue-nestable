@@ -1,13 +1,13 @@
 <template>
   <div
-    draggable
-    class="nestable-handle"
-    @dragstart="dragstart"
-    @touchstart="dragstart"
-    @touchend="touchend"
-    @touchmove="touchmove"
+      draggable="true"
+      class="nestable-handle"
+      @dragstart="dragstart"
+      @touchstart="dragstart"
+      @touchend="touchend"
+      @touchmove="touchmove"
   >
-    <slot />
+    <slot/>
   </div>
 </template>
 
@@ -29,17 +29,24 @@ export default {
 
   inject: ['group', 'onDragEnd'],
 
+  mounted() {
+    console.log('mounted  ', {terze: this.item})
+  },
+
   methods: {
-    dragstart (event) {
+    dragstart(event) {
       const item = this.item || this.$parent.item
       this.notifyDragStart(this.group, event, item)
     },
-    touchend (event) {
+    touchend(event) {
       this.onDragEnd(event)
     },
-    touchmove (event) {
+    touchmove(event) {
       this.notifyMouseMove(this.group, event)
     }
   }
 }
 </script>
+
+<style scoped>
+</style>
