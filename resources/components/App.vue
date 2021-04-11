@@ -1,26 +1,54 @@
 <template>
-  <vue-nestable>
+  <section>
 
-    <slot name="entry_1">Entry 1</slot>
-    <slot name="entry_2">Entry 2</slot>
-    <slot name="entry_3">Entry 3</slot>
-    <slot name="entry_4">Entry 4</slot>
+    <vue-nestable :value="nestableItems">
+      <vue-nestable-handle
+          v-slot="{ item }"
+          :item="item"
+      >{{ item }}
+      </vue-nestable-handle>
+    </vue-nestable>
 
-  </vue-nestable>
+  </section>
 </template>
 
 <script>
 
-import {default as VueNestable} from './VueNestable';
+import VueNestable from './VueNestable';
+import VueNestableHandle from './VueNestableHandle';
 
 export default {
   name: 'App',
   components: {
     VueNestable,
+    VueNestableHandle,
+  },
+  data() {
+    return {
+      nestableItems: [
+        {
+          id: 0,
+          text: 'Andy'
+        }, {
+          id: 1,
+          text: 'Harry',
+          children: [{
+            id: 2,
+            text: 'David'
+          }]
+        }, {
+          id: 3,
+          text: 'Lisa'
+        }
+      ]
+    }
   }
 }
 
 </script>
 
 <style>
+section {
+  width: 200px;
+}
 </style>
