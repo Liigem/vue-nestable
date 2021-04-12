@@ -15400,7 +15400,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       this.isDirty = false;
     },
     dragRevert: function dragRevert() {
-      this.$emit('input', this.itemsOld);
+      this.$emit('update:modelValue', this.itemsOld);
       this.pathTo = null;
       this.itemsOld = null;
       this.dragItem = null;

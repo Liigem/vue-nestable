@@ -546,7 +546,7 @@ export default {
     },
 
     dragRevert() {
-      this.$emit('input', this.itemsOld)
+      this.$emit('update:modelValue', this.itemsOld)
 
       this.pathTo = null
       this.itemsOld = null
