@@ -419,7 +419,7 @@ export default {
 
       this.isDirty = true
       this.pathTo = realPathTo
-      this.$emit('input', items)
+      this.$emit('update:modelValue', items)
     },
 
     tryIncreaseDepth(dragItem) {

@@ -15279,7 +15279,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       items = immutability_helper__WEBPACK_IMPORTED_MODULE_7___default()(items, insertPath);
       this.isDirty = true;
       this.pathTo = realPathTo;
-      this.$emit('input', items);
+      this.$emit('update:modelValue', items);
     },
     tryIncreaseDepth: function tryIncreaseDepth(dragItem) {
       var pathFrom = this.getPathById(dragItem[this.keyProp]);
