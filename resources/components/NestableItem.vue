@@ -7,8 +7,7 @@
         @mousemove="onMouseMove"
     >
       <slot
-          :index="index"
-          :item="item"
+          :item="{item}"
           :isChild="isChild"
       />
     </div>
@@ -34,10 +33,18 @@
               v-for="(slot, indexSlot) in Object.keys($slots)"
               :slot="slot"
           >
-            <slot
+            <!--<slot
                 :name="slot"
+                :item="child"
                 v-bind="scope"
-            />
+            />-->
+
+            <vue-nestable-handle
+                :index="childIndex"
+                :item="child">
+              {{ child.text }}
+            </vue-nestable-handle>
+
           </template>
         </NestableItem>
       </template>
@@ -48,10 +55,17 @@
 <script>
 import groupsObserver from '../assets/scripts/groups-observer.js'
 
+import VueNestableHandle from './VueNestableHandle';
+
+
 export default {
   name: 'NestableItem',
 
   mixins: [groupsObserver],
+
+  components: {
+    VueNestableHandle
+  },
 
   props: {
 
@@ -93,15 +107,6 @@ export default {
       breakPoint: null,
       moveDown: false
     }
-  },
-
-  mounted() {
-    const {item, $el} = this;
-    const {text} = item;
-
-    const nestableHandle = $el.querySelector('.nestable-handle');
-
-    // nestableHandle.appendChild(document.createTextNode(text))
   },
 
   computed: {

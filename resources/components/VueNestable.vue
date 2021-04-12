@@ -28,10 +28,19 @@
               v-for="(slot, indexSlot) in Object.keys($slots)"
               :slot="slot"
           >
-            <slot
+            <!--<slot
                 :name="slot"
+                :index="index"
+                :item="item"
                 v-bind="scope"
-            />
+            />-->
+
+            <vue-nestable-handle
+                :index="index"
+                :item="item">
+              {{ item.text }}
+            </vue-nestable-handle>
+
           </template>
         </NestableItem>
       </template>
@@ -56,6 +65,7 @@
             >
               <slot
                   :name="slot"
+                  :item="dragItem"
                   v-bind="scope"
               />
             </template>
@@ -75,6 +85,7 @@ import callsHooks from '../assets/scripts/calls-hooks.js'
 
 import Placeholder from './Placeholder';
 import NestableItem from './NestableItem';
+import VueNestableHandle from './VueNestableHandle';
 
 import {
   closest,
@@ -159,7 +170,8 @@ export default {
 
   components: {
     NestableItem,
-    Placeholder
+    Placeholder,
+    VueNestableHandle
   },
 
   computed: {

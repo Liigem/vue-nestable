@@ -3,7 +3,7 @@ export default {
     // ––––––––––––––––––––––––––––––––––––
     // Getter methods
     // ––––––––––––––––––––––––––––––––––––
-    getPathById (id, items = this.value) {
+    getPathById (id, items = this.modelValue) {
       let path = []
 
       items.every((item, i) => {
@@ -23,7 +23,7 @@ export default {
       return path
     },
 
-    getItemByPath (path, items = this.value) {
+    getItemByPath (path, items = this.modelValue) {
       let item = null
 
       path.forEach(index => {

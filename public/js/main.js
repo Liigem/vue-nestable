@@ -14786,6 +14786,7 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _assets_scripts_groups_observer_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../assets/scripts/groups-observer.js */ "./resources/assets/scripts/groups-observer.js");
+/* harmony import */ var _VueNestableHandle__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./VueNestableHandle */ "./resources/components/VueNestableHandle.vue");
 function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
 
 function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -14801,9 +14802,13 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'NestableItem',
   mixins: [_assets_scripts_groups_observer_js__WEBPACK_IMPORTED_MODULE_0__.default],
+  components: {
+    VueNestableHandle: _VueNestableHandle__WEBPACK_IMPORTED_MODULE_1__.default
+  },
   props: {
     item: {
       type: Object,
@@ -14841,13 +14846,6 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
       breakPoint: null,
       moveDown: false
     };
-  },
-  mounted: function mounted() {
-    var item = this.item,
-        $el = this.$el;
-    var text = item.text;
-    var nestableHandle = $el.querySelector('.nestable-handle');
-    nestableHandle.appendChild(document.createTextNode(text));
   },
   computed: {
     isDragging: function isDragging() {
@@ -14975,9 +14973,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _assets_scripts_calls_hooks_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../assets/scripts/calls-hooks.js */ "./resources/assets/scripts/calls-hooks.js");
 /* harmony import */ var _Placeholder__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./Placeholder */ "./resources/components/Placeholder.vue");
 /* harmony import */ var _NestableItem__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./NestableItem */ "./resources/components/NestableItem.vue");
-/* harmony import */ var _assets_scripts_utils__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../assets/scripts/utils */ "./resources/assets/scripts/utils.js");
-/* harmony import */ var immutability_helper__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! immutability-helper */ "./node_modules/immutability-helper/index.js");
-/* harmony import */ var immutability_helper__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(immutability_helper__WEBPACK_IMPORTED_MODULE_6__);
+/* harmony import */ var _VueNestableHandle__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./VueNestableHandle */ "./resources/components/VueNestableHandle.vue");
+/* harmony import */ var _assets_scripts_utils__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../assets/scripts/utils */ "./resources/assets/scripts/utils.js");
+/* harmony import */ var immutability_helper__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! immutability-helper */ "./node_modules/immutability-helper/index.js");
+/* harmony import */ var immutability_helper__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(immutability_helper__WEBPACK_IMPORTED_MODULE_7__);
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
@@ -14991,11 +14990,12 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
 
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'VueNestable',
   mixins: [_assets_scripts_nestable_helpers_js__WEBPACK_IMPORTED_MODULE_0__.default, _assets_scripts_groups_observer_js__WEBPACK_IMPORTED_MODULE_1__.default, _assets_scripts_calls_hooks_js__WEBPACK_IMPORTED_MODULE_2__.default],
   props: {
-    value: {
+    modelValue: {
       type: Array,
       required: true,
       "default": function _default() {
@@ -15054,11 +15054,12 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   },
   components: {
     NestableItem: _NestableItem__WEBPACK_IMPORTED_MODULE_4__.default,
-    Placeholder: _Placeholder__WEBPACK_IMPORTED_MODULE_3__.default
+    Placeholder: _Placeholder__WEBPACK_IMPORTED_MODULE_3__.default,
+    VueNestableHandle: _VueNestableHandle__WEBPACK_IMPORTED_MODULE_5__.default
   },
   computed: {
     listIsEmpty: function listIsEmpty() {
-      return this.value.length === 0;
+      return this.modelValue.length === 0;
     },
     itemOptions: function itemOptions() {
       return {
@@ -15095,8 +15096,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     this.stopTrackMouse();
   },
   created: function created() {
-    var items = (0,_assets_scripts_utils__WEBPACK_IMPORTED_MODULE_5__.listWithChildren)(this.value, this.childrenProp);
-    this.$emit('input', items);
+    var items = (0,_assets_scripts_utils__WEBPACK_IMPORTED_MODULE_6__.listWithChildren)(this.modelValue, this.childrenProp);
+    this.$emit('update:modelValue', items);
     this.isDirty = false;
     this.registerNestable(this);
   },
@@ -15144,10 +15145,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         event.stopPropagation();
       }
 
-      this.el = (0,_assets_scripts_utils__WEBPACK_IMPORTED_MODULE_5__.closest)(event.target, '.nestable-item');
+      this.el = (0,_assets_scripts_utils__WEBPACK_IMPORTED_MODULE_6__.closest)(event.target, '.nestable-item');
       this.startTrackMouse();
       this.dragItem = item;
-      this.itemsOld = this.value; // Trigger a mouseMove event to update the ghost item with the mouse
+      this.itemsOld = this.modelValue; // Trigger a mouseMove event to update the ghost item with the mouse
       // position
 
       this.$nextTick(function () {
@@ -15202,7 +15203,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         this.mouse.last.x = clientX;
       }
 
-      var transformProps = (0,_assets_scripts_utils__WEBPACK_IMPORTED_MODULE_5__.getTransformProps)(clientX, clientY); // In some cases the drag-layer might not be at the top left of the window,
+      var transformProps = (0,_assets_scripts_utils__WEBPACK_IMPORTED_MODULE_6__.getTransformProps)(clientX, clientY); // In some cases the drag-layer might not be at the top left of the window,
       // we need to find, where it acually is, and incorperate the position into the calculation.
 
       var elDragLayer = document.querySelector('.nestable-' + this.group + ' .nestable-drag-layer');
@@ -15215,7 +15216,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       var elCopy = document.querySelector('.nestable-' + this.group + ' .nestable-drag-layer > .nestable-list');
 
       if (!this.elCopyStyles) {
-        var offset = (0,_assets_scripts_utils__WEBPACK_IMPORTED_MODULE_5__.getOffsetRect)(this.el);
+        var offset = (0,_assets_scripts_utils__WEBPACK_IMPORTED_MODULE_6__.getOffsetRect)(this.el);
         this.elCopyStyles = _objectSpread({
           marginTop: "".concat(offset.top - clientY - dragLayerTop, "px"),
           marginLeft: "".concat(offset.left - clientX - dragLayerLeft, "px")
@@ -15273,9 +15274,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         pathFrom: pathFrom,
         pathTo: realPathTo
       })) return;
-      var items = this.value;
-      items = immutability_helper__WEBPACK_IMPORTED_MODULE_6___default()(items, removePath);
-      items = immutability_helper__WEBPACK_IMPORTED_MODULE_6___default()(items, insertPath);
+      var items = this.modelValue;
+      items = immutability_helper__WEBPACK_IMPORTED_MODULE_7___default()(items, removePath);
+      items = immutability_helper__WEBPACK_IMPORTED_MODULE_7___default()(items, insertPath);
       this.isDirty = true;
       this.pathTo = realPathTo;
       this.$emit('input', items);
@@ -15390,7 +15391,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     },
     dragApply: function dragApply() {
       this.$emit('change', this.dragItem, {
-        items: this.value,
+        items: this.modelValue,
         pathTo: this.pathTo
       });
       this.pathTo = null;
@@ -15434,13 +15435,17 @@ __webpack_require__.r(__webpack_exports__);
   },
   inject: ['group', 'onDragEnd'],
   mounted: function mounted() {
-    console.log('mounted  ', {
-      terze: this.item
+    var item = this.item;
+    console.log({
+      item: item
     });
   },
   methods: {
     dragstart: function dragstart(event) {
       var item = this.item || this.$parent.item;
+      console.log({
+        item: item
+      });
       this.notifyDragStart(this.group, event, item);
     },
     touchend: function touchend(event) {
@@ -15468,30 +15473,23 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
 
 function render(_ctx, _cache, $props, $setup, $data, $options) {
-  var _component_vue_nestable_handle = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("vue-nestable-handle");
-
   var _component_vue_nestable = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("vue-nestable");
 
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("section", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_vue_nestable, {
-    value: $data.nestableItems
+    modelValue: $data.nestableItems,
+    "onUpdate:modelValue": _cache[1] || (_cache[1] = function ($event) {
+      return $data.nestableItems = $event;
+    })
   }, {
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-      return [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($data.nestableItems, function (item, index) {
-        return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_vue_nestable_handle, {
-          item: item
-        }, null, 8
-        /* PROPS */
-        , ["item"]);
-      }), 256
-      /* UNKEYED_FRAGMENT */
-      ))];
+      return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("<vue-nestable-handle\n          v-slot=\"{ item }\"\n          :item=\"item\">\n        {{ item }} Test\n      </vue-nestable-handle>")];
     }),
     _: 1
     /* STABLE */
 
   }, 8
   /* PROPS */
-  , ["value"])]);
+  , ["modelValue"])]);
 }
 
 /***/ }),
@@ -15514,6 +15512,8 @@ var _hoisted_1 = {
   "class": "nestable-list"
 };
 function render(_ctx, _cache, $props, $setup, $data, $options) {
+  var _component_vue_nestable_handle = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("vue-nestable-handle");
+
   var _component_NestableItem = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("NestableItem", true);
 
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("li", {
@@ -15530,8 +15530,9 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       return $options.onMouseMove && $options.onMouseMove.apply($options, arguments);
     })
   }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.renderSlot)(_ctx.$slots, "default", {
-    index: $props.index,
-    item: $props.item,
+    item: {
+      item: $props.item
+    },
     isChild: $props.isChild
   })], 32
   /* HYDRATE_EVENTS */
@@ -15551,7 +15552,21 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       return {
         name: "default",
         fn: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function (scope) {
-          return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.renderSlot)(_ctx.$slots, slot, scope)];
+          return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("<slot\n                :name=\"slot\"\n                :item=\"child\"\n                v-bind=\"scope\"\n            />"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_vue_nestable_handle, {
+            index: childIndex,
+            item: child
+          }, {
+            "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
+              return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)((0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(child.text), 1
+              /* TEXT */
+              )];
+            }),
+            _: 2
+            /* DYNAMIC */
+
+          }, 1032
+          /* PROPS, DYNAMIC_SLOTS */
+          , ["index", "item"])];
         })
       };
     })]), 1032
@@ -15626,6 +15641,8 @@ var _hoisted_3 = {
 var render = /*#__PURE__*/_withId(function (_ctx, _cache, $props, $setup, $data, $options) {
   var _component_Placeholder = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("Placeholder");
 
+  var _component_vue_nestable_handle = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("vue-nestable-handle");
+
   var _component_NestableItem = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("NestableItem");
 
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", {
@@ -15644,7 +15661,7 @@ var render = /*#__PURE__*/_withId(function (_ctx, _cache, $props, $setup, $data,
 
   }, 8
   /* PROPS */
-  , ["options"])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Render items "), ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($props.value, function (item, index) {
+  , ["options"])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Render items "), ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($props.modelValue, function (item, index) {
     return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_NestableItem, {
       key: item[$props.keyProp],
       index: index,
@@ -15658,7 +15675,21 @@ var render = /*#__PURE__*/_withId(function (_ctx, _cache, $props, $setup, $data,
       return {
         name: "default",
         fn: _withId(function (scope) {
-          return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.renderSlot)(_ctx.$slots, slot, scope, undefined, true)];
+          return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("<slot\n                :name=\"slot\"\n                :index=\"index\"\n                :item=\"item\"\n                v-bind=\"scope\"\n            />"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_vue_nestable_handle, {
+            index: index,
+            item: item
+          }, {
+            "default": _withId(function () {
+              return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)((0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(item.text), 1
+              /* TEXT */
+              )];
+            }),
+            _: 2
+            /* DYNAMIC */
+
+          }, 1032
+          /* PROPS, DYNAMIC_SLOTS */
+          , ["index", "item"])];
         })
       };
     })]), 1032
@@ -15681,7 +15712,9 @@ var render = /*#__PURE__*/_withId(function (_ctx, _cache, $props, $setup, $data,
     return {
       name: "default",
       fn: _withId(function (scope) {
-        return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.renderSlot)(_ctx.$slots, slot, scope, undefined, true)];
+        return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.renderSlot)(_ctx.$slots, slot, (0,vue__WEBPACK_IMPORTED_MODULE_0__.mergeProps)({
+          item: $data.dragItem
+        }, scope), undefined, true)];
       })
     };
   })]), 1032
@@ -15727,7 +15760,9 @@ var render = /*#__PURE__*/_withId(function (_ctx, _cache, $props, $setup, $data,
     onTouchmove: _cache[4] || (_cache[4] = function () {
       return $options.touchmove && $options.touchmove.apply($options, arguments);
     })
-  }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.renderSlot)(_ctx.$slots, "default", {}, undefined, true)], 32
+  }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.renderSlot)(_ctx.$slots, "default", {
+    item: $props.item
+  }, undefined, true)], 32
   /* HYDRATE_EVENTS */
   );
 });
@@ -15884,7 +15919,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
     getPathById: function getPathById(id) {
       var _this = this;
 
-      var items = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : this.value;
+      var items = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : this.modelValue;
       var path = [];
       items.every(function (item, i) {
         if (item[_this.keyProp] === id) {
@@ -15904,7 +15939,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
     getItemByPath: function getItemByPath(path) {
       var _this2 = this;
 
-      var items = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : this.value;
+      var items = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : this.modelValue;
       var item = null;
       path.forEach(function (index) {
         var list = item && item[_this2.childrenProp] ? item[_this2.childrenProp] : items;

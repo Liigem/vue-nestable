@@ -7,7 +7,7 @@
       @touchend="touchend"
       @touchmove="touchmove"
   >
-    <slot/>
+    <slot :item="item" />
   </div>
 </template>
 
@@ -25,12 +25,16 @@ export default {
       required: true,
       default: () => ({})
     }
+
   },
 
   inject: ['group', 'onDragEnd'],
 
   mounted() {
+    const {item} = this
+    console.log({item})
   },
+
 
   methods: {
     dragstart(event) {

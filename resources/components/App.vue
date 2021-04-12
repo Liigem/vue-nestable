@@ -2,11 +2,11 @@
   <section>
 
     <vue-nestable v-model="nestableItems">
-      <vue-nestable-handle
+      <!--<vue-nestable-handle
           v-slot="{ item }"
           :item="item">
-        Test
-      </vue-nestable-handle>
+        {{ item }} Test
+      </vue-nestable-handle>-->
     </vue-nestable>
 
   </section>
