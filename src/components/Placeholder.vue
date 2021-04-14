@@ -10,7 +10,7 @@
 </template>
 
 <script>
-import groupsObserver from '../assets/scripts/groups-observer.js'
+import groupsObserver from '../groups-observer.js'
 
 export default {
   name: 'Placeholder',

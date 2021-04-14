@@ -63,11 +63,18 @@
                 v-for="(slot, indexSlot) in Object.keys($slots)"
                 :slot="slot"
             >
-              <slot
+              <!--<slot
                   :name="slot"
                   :item="dragItem"
                   v-bind="scope"
-              />
+              />-->
+
+              <vue-nestable-handle
+                :index="indexSlot"
+                :item="dragItem">
+                {{ dragItem.text }}
+              </vue-nestable-handle>
+
             </template>
           </NestableItem>
         </ol>
@@ -79,20 +86,20 @@
 </template>
 
 <script>
-import nestableHelpers from '../assets/scripts/nestable-helpers.js'
-import groupsObserver from '../assets/scripts/groups-observer.js'
-import callsHooks from '../assets/scripts/calls-hooks.js'
+import nestableHelpers from '../nestable-helpers.js'
+import groupsObserver from '../groups-observer.js'
+import callsHooks from '../calls-hooks.js'
 
-import Placeholder from './Placeholder';
-import NestableItem from './NestableItem';
-import VueNestableHandle from './VueNestableHandle';
+import Placeholder from './Placeholder.vue'
+import NestableItem from './NestableItem.vue'
+import VueNestableHandle from './VueNestableHandle.vue'
 
 import {
   closest,
   getOffsetRect,
   getTransformProps,
   listWithChildren
-} from "../assets/scripts/utils";
+} from "../utils";
 
 import update from 'immutability-helper'
 
@@ -556,7 +563,3 @@ export default {
   }
 }
 </script>
-
-<style scoped>
-
-</style>

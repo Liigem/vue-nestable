@@ -53,9 +53,9 @@
 </template>
 
 <script>
-import groupsObserver from '../assets/scripts/groups-observer.js'
+import groupsObserver from '../groups-observer.js'
 
-import VueNestableHandle from './VueNestableHandle';
+import VueNestableHandle from './VueNestableHandle.vue';
 
 
 export default {
@@ -101,6 +101,10 @@ export default {
   },
 
   inject: ['listId', 'group', 'keyProp'],
+
+  mounted() {
+    console.log('mounted', {item: this.item})
+  },
 
   data() {
     return {
