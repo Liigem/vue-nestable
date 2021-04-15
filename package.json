@@ -18,7 +18,10 @@
     "dev": "webpack serve --mode development --open --hot",
     "build": "rm -rf ./dist && bili",
     "build:example": "rm -rf ./build && webpack --mode production --progress",
-    "deploy-docs": "npm run build:example; gh-pages -d build"
+    "deploy-docs": "npm run build:example; gh-pages -d build",
+    "test": "jest",
+    "lint": "eslint --ext .js,.vue .",
+    "fix": "eslint --ext .js,.vue . --fix"
   },
   "dependencies": {
     "vuex": "^4.0.0"
@@ -30,13 +33,19 @@
   "devDependencies": {
     "@babel/preset-env": "^7.13.15",
     "@vue/compiler-sfc": "^3.0.7",
+    "@vue/test-utils": "^2.0.0-rc.4",
     "axios": "^0.21.1",
+    "babel-jest": "^26.6.3",
     "babel-loader": "^8.2.2",
     "bili": "^5.0.5",
     "css-loader": "^5.2.1",
+    "eslint": "^7.24.0",
+    "eslint-config-standard": "^16.0.2",
+    "eslint-plugin-vue": "^7.9.0",
     "gh-pages": "^3.1.0",
     "html-webpack-plugin": "^5.3.1",
     "immutability-helper": "^3.1.1",
+    "jest": "^26.6.3",
     "lodash": "^4.17.19",
     "resolve-url-loader": "^3.1.2",
     "rollup-plugin-vue": "^6.0.0",
@@ -52,5 +61,19 @@
     "> 1%",
     "last 2 versions",
     "not dead"
+  ],
+  "jest": {
+    "moduleFileExtensions": [
+      "js",
+      "json",
+      "vue"
+    ],
+    "transform": {
+      ".*\\.(vue)$": "vue-jest",
+      "^.+\\.js$": "babel-jest"
+    }
+  },
+  "pre-commit": [
+    "test"
   ]
 }

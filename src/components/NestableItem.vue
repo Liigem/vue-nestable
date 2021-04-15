@@ -1,37 +1,35 @@
 <template>
   <li :class="itemClasses">
     <div
-        class="nestable-item-content"
-        @mouseenter="onMouseEnter"
-        @mouseleave="onMouseLeave"
-        @mousemove="onMouseMove"
+      class="nestable-item-content"
+      @mouseenter="onMouseEnter"
+      @mouseleave="onMouseLeave"
+      @mousemove="onMouseMove"
     >
       <slot
-          :item="{item}"
-          :isChild="isChild"
+        :item="{item}"
+        :isChild="isChild"
       />
     </div>
 
     <ol
-        v-if="hasChildren"
-        class="nestable-list"
+      v-if="hasChildren"
+      class="nestable-list"
     >
-      <template
-          v-for="(child, childIndex) in item[options.childrenProp]"
-          :key="child[keyProp]"
-      >
+      <template v-for="(child, childIndex) in item[options.childrenProp]">
         <NestableItem
-            :item="child"
-            :index="childIndex"
-            :options="options"
-            :is-copy="isCopy"
-            is-child
+          :key="child[keyProp]"
+          :item="child"
+          :index="childIndex"
+          :options="options"
+          :is-copy="isCopy"
+          is-child
         >
           <!-- bind scoped slots to the nestable-item component -->
           <template
-              v-slot="scope"
-              v-for="(slot, indexSlot) in Object.keys($slots)"
-              :slot="slot"
+            v-slot="scope"
+            v-for="(slot, indexSlot) in Object.keys($slots)"
+            :slot="slot"
           >
             <!--<slot
                 :name="slot"
@@ -40,8 +38,8 @@
             />-->
 
             <vue-nestable-handle
-                :index="childIndex"
-                :item="child">
+              :index="childIndex"
+              :item="child">
               {{ child.text }}
             </vue-nestable-handle>
 
