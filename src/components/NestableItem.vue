@@ -16,9 +16,11 @@
       v-if="hasChildren"
       class="nestable-list"
     >
-      <template v-for="(child, childIndex) in item[options.childrenProp]">
+      <template
+        v-for="(child, childIndex) in item[options.childrenProp]"
+        :key="child[keyProp]"
+      >
         <NestableItem
-          :key="child[keyProp]"
           :item="child"
           :index="childIndex"
           :options="options"
@@ -27,8 +29,8 @@
         >
           <!-- bind scoped slots to the nestable-item component -->
           <template
-            v-slot="scope"
             v-for="(slot, indexSlot) in Object.keys($slots)"
+            v-slot="scope"
             :slot="slot"
           >
             <!--<slot
@@ -39,7 +41,8 @@
 
             <vue-nestable-handle
               :index="childIndex"
-              :item="child">
+              :item="child"
+            >
               {{ child.text }}
             </vue-nestable-handle>
 

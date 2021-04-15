@@ -21,7 +21,10 @@
     "deploy-docs": "npm run build:example; gh-pages -d build",
     "test": "jest",
     "lint": "eslint --ext .js,.vue .",
-    "fix": "eslint --ext .js,.vue . --fix"
+    "fix": "eslint --ext .js,.vue . --fix",
+    "prepublish": "npm run build",
+    "postpublish": "npm run deploy-docs",
+    "pretest": "npm run lint"
   },
   "dependencies": {
     "vuex": "^4.0.0"

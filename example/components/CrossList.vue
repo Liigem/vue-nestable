@@ -8,7 +8,7 @@
           group="cross"
         >
           <VueNestableHandle
-            slot-scope="{ item }"
+            v-slot="{ item }"
             :item="item"
           >
             {{ item.text }}
@@ -22,7 +22,7 @@
           group="cross"
         >
           <VueNestableHandle
-            slot-scope="{ item }"
+            v-slot="{ item }"
             :item="item"
           >
             {{ item.text }}

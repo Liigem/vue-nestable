@@ -4,8 +4,8 @@
     <ol class="nestable-list nestable-group">
       <!-- No items in list -->
       <Placeholder
-          v-if="listIsEmpty"
-          :options="itemOptions"
+        v-if="listIsEmpty"
+        :options="itemOptions"
       >
         <slot name="placeholder">
           No content
@@ -14,19 +14,19 @@
 
       <!-- Render items -->
       <template
-          v-for="(item, index) in modelValue"
-          :key="item[keyProp]"
+        v-for="(item, index) in modelValue"
+        :key="item[keyProp]"
       >
         <NestableItem
-            :index="index"
-            :item="item"
-            :options="itemOptions"
+          :index="index"
+          :item="item"
+          :options="itemOptions"
         >
           <!-- bind scoped slots to the nestable-item component -->
           <template
-              v-slot="scope"
-              v-for="(slot, indexSlot) in Object.keys($slots)"
-              :slot="slot"
+            v-for="(slot, indexSlot) in Object.keys($slots)"
+            v-slot="scope"
+            :slot="slot"
           >
             <!--<slot
                 :name="slot"
@@ -36,8 +36,9 @@
             />-->
 
             <vue-nestable-handle
-                :index="index"
-                :item="item">
+              :index="index"
+              :item="item"
+            >
               {{ item.text }}
             </vue-nestable-handle>
 
@@ -49,19 +50,19 @@
     <template v-if="dragItem">
       <div class="nestable-drag-layer">
         <ol
-            :style="listStyles"
-            class="nestable-list"
+          :style="listStyles"
+          class="nestable-list"
         >
           <NestableItem
-              :item="dragItem"
-              :options="itemOptions"
-              :is-copy="true"
+            :item="dragItem"
+            :options="itemOptions"
+            :is-copy="true"
           >
             <!-- bind scoped slots to the nestable-item component -->
             <template
-                v-slot="scope"
-                v-for="(slot, indexSlot) in Object.keys($slots)"
-                :slot="slot"
+              v-for="(slot, indexSlot) in Object.keys($slots)"
+              v-slot="scope"
+              :slot="slot"
             >
               <!--<slot
                   :name="slot"
@@ -71,7 +72,8 @@
 
               <vue-nestable-handle
                 :index="indexSlot"
-                :item="dragItem">
+                :item="dragItem"
+              >
                 {{ dragItem.text }}
               </vue-nestable-handle>
 
@@ -298,8 +300,8 @@ export default {
       this.el = null
 
       isCancel
-          ? this.dragRevert()
-          : this.dragApply()
+        ? this.dragRevert()
+        : this.dragApply()
     },
 
     onKeyDown(event) {
@@ -379,8 +381,8 @@ export default {
         const diffX = this.rtl ? this.mouse.last.x - clientX : clientX - this.mouse.last.x
 
         if (
-            (diffX >= 0 && this.mouse.shift.x >= 0) ||
-            (diffX <= 0 && this.mouse.shift.x <= 0)
+          (diffX >= 0 && this.mouse.shift.x >= 0) ||
+          (diffX <= 0 && this.mouse.shift.x <= 0)
         ) {
           this.mouse.shift.x += diffX
         } else {
@@ -441,9 +443,9 @@ export default {
         // previous sibling is not collapsed
         if (prevSibling[this.childrenProp] && (!prevSibling[this.childrenProp].length || !this.isCollapsed(prevSibling))) {
           const pathTo = pathFrom
-              .slice(0, -1)
-              .concat(itemIndex - 1)
-              .concat(prevSibling[this.childrenProp].length)
+            .slice(0, -1)
+            .concat(itemIndex - 1)
+            .concat(prevSibling[this.childrenProp].length)
 
           // if collapsed by default
           // and was no children here

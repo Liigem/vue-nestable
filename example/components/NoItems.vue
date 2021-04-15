@@ -5,13 +5,15 @@
       cross-list
       group="cross"
     >
-      <div slot="placeholder">
-        <b>This list is empty</b>
-        <p>You can add items by dragging them here from the list above.</p>
-      </div>
+      <template #placeholder>
+        <div>
+          <b>This list is empty</b>
+          <p>You can add items by dragging them here from the list above.</p>
+        </div>
+      </template>
 
       <VueNestableHandle
-        slot-scope="{ item }"
+        v-slot="{ item }"
         :item="item"
       >
         {{ item.text }}

@@ -1,8 +1,10 @@
 <template>
   <ComponentExample link="List">
     <VueNestable v-model="nestableItems">
-      <template v-slot="{ item, index }" :key="index">
-        <span><small>[{{ index }}]</small> {{ item.text }}</span>
+      <template #default="{ item, index }">
+        <span :key="index">
+          <small>[{{ index }}]</small> {{ item.text }}
+        </span>
       </template>
     </VueNestable>
   </ComponentExample>
@@ -16,7 +18,7 @@ export default {
     ComponentExample
   },
 
-  data() {
+  data () {
     return {
       nestableItems: [
         {

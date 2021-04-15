@@ -10,7 +10,7 @@
       children-prop="nested"
       class-prop="class"
     >
-      <template slot-scope="{ item }">
+      <template #default="{ item }">
         <!-- Handler -->
         <VueNestableHandle :item="item">
           <i class="fas fa-bars" />

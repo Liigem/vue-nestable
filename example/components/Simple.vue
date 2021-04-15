@@ -2,7 +2,7 @@
   <ComponentExample link="Simple">
     <VueNestable v-model="nestableItems">
       <VueNestableHandle
-        v-slot="{ item, index }"
+        v-slot="{ item }"
         :item="item"
       >
         <i class="fas fa-user" />
